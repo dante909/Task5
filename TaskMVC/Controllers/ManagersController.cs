@@ -15,10 +15,27 @@ namespace TaskMVC.Controllers
     {
         private DAL.AppContext db = new DAL.AppContext();
 
-        // GET: Managers
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string searchString)
         {
-            return View(db.Managers.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var managers = from s in db.Managers
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                managers = managers.Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())
+                                       || s.FirstMidName.ToUpper().Contains(searchString.ToUpper()));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    managers = managers.OrderByDescending(s => s.LastName);
+                    break;
+                default:
+                    managers = managers.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            return View(managers.ToList());
         }
 
         // GET: Managers/Details/5
