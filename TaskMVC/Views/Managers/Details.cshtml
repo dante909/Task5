@@ -1,0 +1,64 @@
+﻿@model TaskMVC.Models.Manager
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Manager</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstMidName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstMidName)
+        </dd>
+
+    </dl>
+    <div class="display-label">
+        @Html.LabelFor(model => model.SalesInfo)
+    </div>
+    <div class="display-field">
+        <table>
+            <tr>
+                <th>Client Name</th>
+                <th>Product Name</th>
+                <th>Product Cost</th>
+                <th>Date of Sale</th>
+            </tr>
+            @foreach (var item in Model.SalesInfo)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOfSale)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ManagerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
