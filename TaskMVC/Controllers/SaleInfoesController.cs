@@ -17,22 +17,12 @@ namespace TaskMVC.Controllers
 
         public ViewResult Index(string sortOrder, string searchString)
         {
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             var salesInfo = db.SalesInfo.Include(s => s.Manager);
             if (!String.IsNullOrEmpty(searchString))
             {
                 salesInfo = salesInfo.Where(s => s.ProductName.ToUpper().Contains(searchString.ToUpper())
                                        || s.ClientName.ToUpper().Contains(searchString.ToUpper())
                                        || s.Manager.LastName.ToUpper().Contains(searchString.ToUpper()));
-            }
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    salesInfo = salesInfo.OrderByDescending(s => s.ProductName);
-                    break;
-                default:
-                    salesInfo = salesInfo.OrderBy(s => s.ProductName);
-                    break;
             }
             return View(salesInfo.ToList());
         }
