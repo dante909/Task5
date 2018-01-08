@@ -201,6 +201,8 @@
     <Compile Include="Controllers\ManagersController.cs" />
     <Compile Include="Controllers\SaleInfoesController.cs" />
     <Compile Include="DAL\AppContext.cs" />
+    <Compile Include="DAL\EFGenericRepository.cs" />
+    <Compile Include="DAL\IGenericRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

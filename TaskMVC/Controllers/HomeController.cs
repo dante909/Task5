@@ -10,6 +10,7 @@ namespace TaskMVC.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Message = "Welcome to my application!";
             return View();
         }
        
